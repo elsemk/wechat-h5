@@ -1,95 +1,263 @@
 :root {
   --wx-green: #07c160;
   --wx-bg: #ededed;
-  --wx-text: #1f1f1f;
+  --wx-card: #f7f7f7;
+  --wx-line: #e6e6e6;
+  --wx-text: #191919;
+  --wx-sub: #8c8c8c;
 }
 
 * { box-sizing: border-box; }
 
-body {
+html, body, #root {
   margin: 0;
+  width: 100%;
+  min-height: 100%;
+  background: var(--wx-bg);
   font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif;
   color: var(--wx-text);
-  background: var(--wx-bg);
 }
 
-.wechat-page {
+/* Auth */
+.wx-auth-wrap {
   min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 18px;
-}
-
-.wechat-card {
-  width: 100%;
-  max-width: 420px;
+  max-width: 430px;
+  margin: 0 auto;
   background: #fff;
-  border-radius: 14px;
-  padding: 22px 16px;
-  box-shadow: 0 8px 32px rgba(0,0,0,.08);
+  padding: 100px 28px 32px;
 }
 
-.wechat-header { text-align: center; margin-bottom: 20px; }
-.wechat-logo { font-size: 28px; font-weight: 700; }
-.wechat-sub { color: #8f8f8f; font-size: 13px; margin-top: 4px; }
-
-.wechat-tabs { display: flex; gap: 8px; margin-bottom: 14px; }
-.wechat-tabs button {
-  flex: 1;
-  border: 1px solid #ddd;
-  background: #fafafa;
-  border-radius: 8px;
-  padding: 10px;
-}
-.wechat-tabs button.active {
-  border-color: var(--wx-green);
-  color: var(--wx-green);
-  background: #f0fff7;
-}
-
-.wechat-form { display: grid; gap: 10px; }
-.wechat-form input {
-  width: 100%;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 12px;
-  font-size: 14px;
-}
-
-.wechat-btn {
-  width: 100%;
-  border: none;
-  border-radius: 8px;
-  padding: 12px;
-  color: #fff;
-  background: var(--wx-green);
-  font-size: 15px;
+.wx-auth-logo {
+  font-size: 30px;
   font-weight: 600;
-}
-
-.wechat-btn.secondary {
-  background: #f5f5f5;
-  color: #333;
-  border: 1px solid #ddd;
-}
-
-.wechat-msg {
-  margin-top: 12px;
-  font-size: 13px;
-  color: #666;
   text-align: center;
 }
 
-.wechat-profile { text-align: center; }
-
-@media (max-width: 430px) {
-  .wechat-card {
-    max-width: 100%;
-    min-height: 92vh;
-    border-radius: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
+.wx-auth-sub {
+  text-align: center;
+  color: var(--wx-sub);
+  margin-top: 8px;
+  margin-bottom: 34px;
+  font-size: 14px;
 }
+
+.wx-auth-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-radius: 10px;
+  background: #f3f3f3;
+  padding: 3px;
+  margin-bottom: 14px;
+}
+
+.wx-auth-tabs button {
+  border: none;
+  background: transparent;
+  border-radius: 8px;
+  height: 36px;
+  font-size: 14px;
+  color: #575757;
+}
+
+.wx-auth-tabs button.active {
+  background: #fff;
+  color: #222;
+}
+
+.wx-auth-form {
+  display: grid;
+  gap: 10px;
+}
+
+.wx-auth-form input {
+  width: 100%;
+  border: 1px solid var(--wx-line);
+  border-radius: 10px;
+  height: 46px;
+  padding: 0 14px;
+  font-size: 15px;
+  outline: none;
+}
+
+.wx-primary-btn {
+  width: 100%;
+  border: none;
+  border-radius: 10px;
+  height: 46px;
+  background: var(--wx-green);
+  color: #fff;
+  font-size: 16px;
+  margin-top: 8px;
+}
+
+.wx-primary-btn:disabled { opacity: .7; }
+
+.wx-auth-msg {
+  margin-top: 12px;
+  text-align: center;
+  color: #6a6a6a;
+  font-size: 13px;
+}
+
+/* Main */
+.wx-shell {
+  min-height: 100vh;
+  max-width: 430px;
+  margin: 0 auto;
+  background: var(--wx-bg);
+  display: flex;
+  flex-direction: column;
+}
+
+.wx-content {
+  flex: 1;
+  overflow: auto;
+  padding-bottom: 72px;
+}
+
+.wx-topbar {
+  height: 48px;
+  background: var(--wx-card);
+  border-bottom: 1px solid var(--wx-line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: sticky;
+  top: 0;
+  z-index: 3;
+}
+
+.wx-topbar-title { font-size: 17px; font-weight: 600; }
+.wx-topbar-right {
+  position: absolute;
+  right: 14px;
+  font-size: 22px;
+  color: #444;
+  line-height: 1;
+}
+
+.wx-list {
+  background: #fff;
+}
+
+.wx-cell {
+  min-height: 66px;
+  border-bottom: 1px solid #efefef;
+  padding: 10px 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.wx-list-compact .wx-cell { min-height: 58px; }
+
+.wx-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: #f2f2f2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+}
+
+.wx-avatar-text {
+  font-size: 16px;
+  font-weight: 600;
+  color: #555;
+}
+
+.wx-cell-main { flex: 1; min-width: 0; }
+.wx-cell-row { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+
+.wx-cell-title {
+  font-size: 16px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.wx-cell-sub {
+  color: var(--wx-sub);
+  font-size: 13px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.wx-cell-time {
+  color: #acacac;
+  font-size: 12px;
+}
+
+.wx-badge {
+  min-width: 18px;
+  height: 18px;
+  border-radius: 9px;
+  background: #fa5151;
+  color: #fff;
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 5px;
+}
+
+.wx-group-title {
+  height: 28px;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  font-size: 12px;
+  color: #999;
+  background: #f6f6f6;
+}
+
+.wx-me-header {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  background: #fff;
+  padding: 20px 14px;
+  margin-bottom: 10px;
+}
+
+.wx-me-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  background: #f1f1f1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+}
+
+.wx-me-name { font-size: 19px; font-weight: 600; }
+.wx-me-id { margin-top: 4px; color: #8f8f8f; font-size: 13px; }
+
+.wx-logout-wrap { padding: 14px; }
+
+.wx-tabbar {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 0;
+  width: 100%;
+  max-width: 430px;
+  height: 62px;
+  background: #f8f8f8;
+  border-top: 1px solid var(--wx-line);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.wx-tabbar button {
+  border: none;
+  background: transparent;
+  font-size: 12px;
+  color: #6f6f6f;
+}
+
+.wx-tabbar button.active { color: var(--wx-green); }
