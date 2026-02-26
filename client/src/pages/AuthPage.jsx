@@ -1,10 +1,13 @@
 import { useState } from 'react';
-import { api, setAuthToken } from '../api';
+import { useNavigate } from 'react-router-dom';
+import { api } from '../api';
+import { setSession } from '../utils/auth';
 import '../styles/wechat.css';
 
 const defaultForm = { account: '', password: '', nickname: '' };
 
-export default function AuthPage({ onLoginSuccess }) {
+export default function AuthPage() {
+  const navigate = useNavigate();
   const [mode, setMode] = useState('login');
   const [form, setForm] = useState(defaultForm);
   const [loading, setLoading] = useState(false);
@@ -22,10 +25,8 @@ export default function AuthPage({ onLoginSuccess }) {
         setMode('login');
       } else {
         const { data } = await api.post('/auth/login', form);
-        localStorage.setItem('wechat_token', data.token);
-        localStorage.setItem('wechat_user', JSON.stringify(data.user));
-        setAuthToken(data.token);
-        onLoginSuccess(data.user);
+        setSession(data.token, data.user);
+        navigate('/chats', { replace: true });
       }
     } catch (error) {
       setMsg(error?.response?.data?.message || '请求失败，请稍后重试');
