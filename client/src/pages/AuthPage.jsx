@@ -9,6 +9,7 @@ export default function AuthPage({ onLoginSuccess }) {
   const [form, setForm] = useState(defaultForm);
   const [loading, setLoading] = useState(false);
   const [msg, setMsg] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
 
   const submit = async (e) => {
     e.preventDefault();
@@ -61,12 +62,22 @@ export default function AuthPage({ onLoginSuccess }) {
           value={form.account}
           onChange={(e) => setForm({ ...form, account: e.target.value })}
         />
-        <input
-          type="password"
-          placeholder="请输入密码"
-          value={form.password}
-          onChange={(e) => setForm({ ...form, password: e.target.value })}
-        />
+        <div className="wx-password-wrap">
+          <input
+            type={showPassword ? 'text' : 'password'}
+            placeholder="请输入密码"
+            value={form.password}
+            onChange={(e) => setForm({ ...form, password: e.target.value })}
+          />
+          <button
+            className="wx-eye-btn"
+            type="button"
+            onClick={() => setShowPassword((v) => !v)}
+            aria-label={showPassword ? '隐藏密码' : '显示密码'}
+          >
+            {showPassword ? '🙈' : '👁️'}
+          </button>
+        </div>
         {mode === 'register' && (
           <input
             placeholder="昵称（可选）"
