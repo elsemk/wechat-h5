@@ -1,4 +1,14 @@
 import { useMemo, useState } from 'react';
+import {
+  RiChat1Line,
+  RiChat1Fill,
+  RiContactsBook2Line,
+  RiContactsBook2Fill,
+  RiCompass3Line,
+  RiCompass3Fill,
+  RiUser3Line,
+  RiUser3Fill,
+} from 'react-icons/ri';
 
 const mockChats = [
   { id: 1, name: '文件传输助手', preview: '明早 9:30 评审别忘了', time: '22:41', badge: 1, avatar: '📁' },
@@ -144,10 +154,22 @@ export default function MainPage({ user, onLogout }) {
       </div>
 
       <div className="wx-tabbar">
-        <button className={tab === 'chats' ? 'active' : ''} onClick={() => setTab('chats')} type="button">微信</button>
-        <button className={tab === 'contacts' ? 'active' : ''} onClick={() => setTab('contacts')} type="button">通讯录</button>
-        <button className={tab === 'discover' ? 'active' : ''} onClick={() => setTab('discover')} type="button">发现</button>
-        <button className={tab === 'me' ? 'active' : ''} onClick={() => setTab('me')} type="button">我</button>
+        <button className={tab === 'chats' ? 'active' : ''} onClick={() => setTab('chats')} type="button">
+          <span className="wx-tabbar-icon">{tab === 'chats' ? <RiChat1Fill /> : <RiChat1Line />}</span>
+          <span className="wx-tabbar-text">微信</span>
+        </button>
+        <button className={tab === 'contacts' ? 'active' : ''} onClick={() => setTab('contacts')} type="button">
+          <span className="wx-tabbar-icon">{tab === 'contacts' ? <RiContactsBook2Fill /> : <RiContactsBook2Line />}</span>
+          <span className="wx-tabbar-text">通讯录</span>
+        </button>
+        <button className={tab === 'discover' ? 'active' : ''} onClick={() => setTab('discover')} type="button">
+          <span className="wx-tabbar-icon">{tab === 'discover' ? <RiCompass3Fill /> : <RiCompass3Line />}</span>
+          <span className="wx-tabbar-text">发现</span>
+        </button>
+        <button className={tab === 'me' ? 'active' : ''} onClick={() => setTab('me')} type="button">
+          <span className="wx-tabbar-icon">{tab === 'me' ? <RiUser3Fill /> : <RiUser3Line />}</span>
+          <span className="wx-tabbar-text">我</span>
+        </button>
       </div>
     </div>
   );
